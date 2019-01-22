@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/><!--启用或禁用延时加载，禁用时，所有关联对象都会即时加载-->
+        <setting name="useGeneratedKeys" value="true" />
+    </settings>
+    <!--mybatis分页插件-->
+    <!--<plugins>
+		<plugin interceptor="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
+			<property name="dialectClass" value="com.github.miemiedev.mybatis.paginator.dialect.MySQLDialect"/>
+		</plugin>
+	</plugins>-->
+    <!--mybatis plus 插件-->
+    <plugins>
+        <!--分页插件-->
+        <plugin interceptor="com.baomidou.mybatisplus.plugins.PaginationInterceptor">
+            <property name="dialectType" value="mysql" />
+        </plugin>
+        <!-- sql性能分析 开发环境使用，线上不推荐。 maxTime 指的是 sql 最大执行时长 -->
+        <plugin interceptor="com.baomidou.mybatisplus.plugins.PerformanceInterceptor">
+            <property name="maxTime" value="2000" />
+            <!-- sql是否格式化 默认false -->
+            <property name="format" value="true" />
+        </plugin>
+        <!-- SQL 执行分析拦截器 stopProceed 发现全表执行 delete update 是否停止运行 该插件只用于开发环境，不建议生产环境使用。。。 -->
+        <plugin interceptor="com.baomidou.mybatisplus.plugins.SqlExplainInterceptor">
+            <property name="stopProceed" value="false" />
+        </plugin>
+    </plugins>
+
+</configuration>
