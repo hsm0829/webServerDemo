@@ -51,7 +51,7 @@ public class MpGenerator {
         //策略配置
         StrategyConfig strategyConfig=new StrategyConfig();
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);//表名生成策略
-        strategyConfig.setInclude(new String[]{"cost","other_datasource","user"});
+        strategyConfig.setInclude(new String[]{"account","bookstock","book"});
         //字段名生成策略
         strategyConfig.setSuperServiceImplClass(rb.getString("superServiceImpl"));
         autoGenerator.setStrategy(strategyConfig);

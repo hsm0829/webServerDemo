@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 1、自动扫描 将标注spring注解的类自动转化为Bean -->
+    <context:component-scan base-package="com.web.generator.service" />
+    <!-- 2、配置数据库资源文件 -->
+    <import resource="data-source.xml" />
+
+    <!-- 3、配置事物管理 -->
+    <!--开启注解事物-->
+    <!--事物的开关，没有此配置，将没有事物-->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <!--创建一个spring事物管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--数据库-->
+        <property name="dataSource" ref="dataSource" />
+    </bean>
 
     <!--拦截器-->
     <mvc:interceptors>

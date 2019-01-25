@@ -31,10 +31,10 @@ public class CostController {
 
     @RequestMapping(value = "/costListPage",method = RequestMethod.POST)
     @ResponseBody
-    public String costMethodController(@RequestParam("size") int size,@RequestParam("current") int current){
+    public List<Cost> costMethodController(@RequestParam("size") int size,@RequestParam("current") int current){
         List<Cost> costList = costService.findCostPage(size, current, null);
         System.out.println("costList : "+ JSON.toJSONString(costList));
-        return "costListPage";
+        return costList;
     }
     @RequestMapping(value = "/saveCost",method = RequestMethod.POST)
     @ResponseBody
@@ -58,7 +58,8 @@ public class CostController {
         try{
             Cost cost=new Cost();
             cost.setMoney(money);
-            res= costService.transactionInsert(flag,cost);
+            costService.transactionInsert(flag,cost);
+            return "Transactional default rollback RuntimeException ";
         }catch(Exception e){
             e.printStackTrace();
         }

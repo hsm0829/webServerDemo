@@ -10,6 +10,8 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,18 +42,31 @@ public class CostServiceImpl extends ServiceImpl<CostMapper, Cost> implements Co
         return list;
     }
 
+    @Transactional
     @Override
     public boolean saveCost(Cost cost) {
         return costMapper.insert(cost)>0;
     }
 
+    /**
+     * 事物传播行为：
+     *  Propagation.REQUIRED ： 支持当前事物，如果不存在，就新建一个
+     *  Propagation.SUPPORTS ： 支持当前事物，如果不存在，就不使用事物
+     *  Propagation.MANDATORY ： 支持当前事物，如果不存在，就抛出异常
+     *  Propagation.REQUIRES_NEW ：如果有事物存在，则挂起当前事物，创建一个新的事物
+     *  Propagation.NOT_SUPPORTED ：以非事物方式运行，如果有事物存在，挂起当前事物
+     *  Propagation.NEVER ：以非事物方式运行，如果有事物，则抛出异常
+     *  Propagation.NESTED ：如果当前事物存在，则嵌套事物运行
+     * @param flag
+     * @param cost
+     */
     @Override
-    public boolean transactionInsert (boolean flag,Cost cost) throws Exception {
+    @Transactional
+    public void transactionInsert (boolean flag,Cost cost) {
         this.saveCost(cost);
         if(flag){
-            throw new Exception("has exception!!!");
+            throw new RuntimeException("has exception!!!");
         }
-        return true;
     }
 
     @Override

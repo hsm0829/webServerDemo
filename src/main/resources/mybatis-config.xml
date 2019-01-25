@@ -18,16 +18,16 @@
         <plugin interceptor="com.baomidou.mybatisplus.plugins.PaginationInterceptor">
             <property name="dialectType" value="mysql" />
         </plugin>
-        <!-- sql性能分析 开发环境使用，线上不推荐。 maxTime 指的是 sql 最大执行时长 -->
-        <plugin interceptor="com.baomidou.mybatisplus.plugins.PerformanceInterceptor">
-            <property name="maxTime" value="2000" />
-            <!-- sql是否格式化 默认false -->
-            <property name="format" value="true" />
-        </plugin>
-        <!-- SQL 执行分析拦截器 stopProceed 发现全表执行 delete update 是否停止运行 该插件只用于开发环境，不建议生产环境使用。。。 -->
-        <plugin interceptor="com.baomidou.mybatisplus.plugins.SqlExplainInterceptor">
-            <property name="stopProceed" value="false" />
-        </plugin>
+        <!--&lt;!&ndash; sql性能分析 开发环境使用，线上不推荐。 maxTime 指的是 sql 最大执行时长 &ndash;&gt;-->
+        <!--<plugin interceptor="com.baomidou.mybatisplus.plugins.PerformanceInterceptor">-->
+            <!--<property name="maxTime" value="2000" />-->
+            <!--&lt;!&ndash; sql是否格式化 默认false &ndash;&gt;-->
+            <!--<property name="format" value="true" />-->
+        <!--</plugin>-->
+        <!--&lt;!&ndash; SQL 执行分析拦截器 stopProceed 发现全表执行 delete update 是否停止运行 该插件只用于开发环境，不建议生产环境使用。。。 &ndash;&gt;-->
+        <!--<plugin interceptor="com.baomidou.mybatisplus.plugins.SqlExplainInterceptor">-->
+            <!--<property name="stopProceed" value="false" />-->
+        <!--</plugin>-->
     </plugins>
 
 </configuration>

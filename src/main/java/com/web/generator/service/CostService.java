@@ -36,7 +36,7 @@ public interface CostService extends IService<Cost> {
      * @param flag
      * @return
      */
-    boolean transactionInsert(boolean flag,Cost cost) throws Exception;
+    void transactionInsert(boolean flag,Cost cost);
 
     /**
      * 根据条件查询列表

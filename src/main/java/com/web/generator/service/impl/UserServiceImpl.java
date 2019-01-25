@@ -5,7 +5,6 @@ import com.web.generator.dao.mapper.UserMapper;
 import com.web.generator.service.UserService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-
 /**
  * <p>
  *  服务实现类

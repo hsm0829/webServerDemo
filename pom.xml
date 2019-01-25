@@ -21,8 +21,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
+      <version>4.12</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-webapp -->
     <dependency>
@@ -82,6 +81,11 @@
       <artifactId>spring-jdbc</artifactId>
       <version>${spring.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
       <!--阿里云数据源-->
       <dependency>
           <groupId>com.alibaba</groupId>
@@ -129,7 +133,22 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.49</version>
     </dependency>
-
+    <!--controller 返回对象转json依赖-->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.9.5</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.9.5</version>
+    </dependency>
   </dependencies>
 
   <build>
