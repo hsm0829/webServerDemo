@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.web.generator.service.BookstockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -30,19 +31,12 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
     @Autowired
     private AccountService accountService;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void buyBook(List<Integer> idList, String telnum) {
-        Account account = accountService.accountByTelnum(telnum);
         for (Integer id:idList){
-            Book book = bookMapper.selectById(id);
-            if (account.getMoney()<book.getPrice().intValue()){
-                throw new RuntimeException("余额不足");
-            }
-            //扣除账户余额
-            accountService.updateAccountByTel(telnum,book.getPrice().intValue());
-            //扣除书本库存
-            bookstockService.updateBookStockNum(1,book.getId());
+            accountService.buyBook(telnum,id);
         }
     }
+
 }

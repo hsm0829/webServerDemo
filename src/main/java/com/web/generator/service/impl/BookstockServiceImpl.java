@@ -7,6 +7,7 @@ import com.web.generator.service.BookstockService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -22,7 +23,6 @@ public class BookstockServiceImpl extends ServiceImpl<BookstockMapper, Bookstock
     @Autowired
     private BookstockMapper bookstockMapper;
 
-    @Transactional
     @Override
     public boolean updateBookStockNum(Integer num, Integer bookid) {
         Bookstock bookstock=new Bookstock();

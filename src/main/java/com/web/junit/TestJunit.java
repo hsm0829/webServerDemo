@@ -47,8 +47,7 @@ public class TestJunit {
     public void buyBook(){
         List<Integer> idList=new ArrayList<>();
         idList.add(1);
-        idList.add(2);
-        idList.add(3);
+//        idList.add(2);
         bookService.buyBook(idList,"15868454211");
     }
 

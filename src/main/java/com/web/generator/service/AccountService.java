@@ -17,4 +17,6 @@ public interface AccountService extends IService<Account> {
 
     Account accountByTelnum(String telnum);
 
+    void buyBook(String telnum,Integer id);
+
 }
