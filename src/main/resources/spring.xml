@@ -2,11 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 1、自动扫描 将标注spring注解的类自动转化为Bean -->
-    <context:component-scan base-package="com.web.generator.service" />
+    <!--<context:component-scan base-package="com.web.generator" />-->
+    <!-- spring 是父容器，springmvc是子容器 ，子容器能访问到父容器的bean，父容器访问不到子容器里的bean
+         service由父容器初始化，是为了service事物的增强处理，如果由子容器装配初始化，则得到的是原样的service，没有进行事物的增强处理
+    -->
+    <context:component-scan base-package="com.web.generator" >
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
     <!-- 2、配置数据库资源文件 -->
     <import resource="data-source.xml" />
 
@@ -24,5 +31,9 @@
     <mvc:interceptors>
         <bean name="testInterceptor" class="com.web.interceptor.TestInterceptor"></bean>
     </mvc:interceptors>
+
+    <!-- aop -->
+    <!-- 配置，使AspectJ起作用：自动为匹配的类生成代理对象 -->
+    <aop:aspectj-autoproxy />
 
 </beans>

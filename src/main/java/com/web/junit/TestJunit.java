@@ -1,8 +1,8 @@
 package com.web.junit;
 
 
+import com.web.generator.aop.ArithmeticCalculatorI;
 import com.web.generator.dao.entity.Account;
-import com.web.generator.dao.entity.Book;
 import com.web.generator.dao.entity.Cost;
 import com.web.generator.service.AccountService;
 import com.web.generator.service.BookService;
@@ -29,12 +29,20 @@ public class TestJunit {
     private AccountService accountService;
     @Autowired
     private BookService bookService;
+    @Autowired
+    private ArithmeticCalculatorI arithmeticCalculatorI;
 
+    @Test
+    public void findCost() {
+        Cost cost=new Cost();
+        cost.setMoney(4);
+        costService.findCostPage(5,1,cost);
+    }
     @Test
     public void testTransaction() {
         Cost cost=new Cost();
         cost.setMoney(4);
-        costService.transactionInsert(true,cost);
+        costService.transactionInsert(false,cost);
     }
     @Test
     public void addAccount(){
@@ -49,6 +57,15 @@ public class TestJunit {
         idList.add(1);
 //        idList.add(2);
         bookService.buyBook(idList,"15868454211");
+    }
+
+
+    @Test
+    public void aopTest(){
+        int result=arithmeticCalculatorI.add(1,2);
+        System.out.println("-->"+result);
+        result=arithmeticCalculatorI.sub(4,2);
+        System.out.println("-->"+result);
     }
 
 }
