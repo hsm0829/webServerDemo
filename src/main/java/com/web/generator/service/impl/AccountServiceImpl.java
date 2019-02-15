@@ -58,22 +58,24 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
      * @param telnum
      * @param id
      */
-//    @Transactional(propagation = Propagation.REQUIRES_NEW , isolation = Isolation.READ_COMMITTED,noRollbackFor = {RuntimeException.class})
-    @Transactional(propagation = Propagation.REQUIRES_NEW , isolation = Isolation.READ_COMMITTED,readOnly = false,timeout = 3)
+//    @Transactional(propagation = Propagation.REQUIRES_NEW , isolation = Isolation.READ_COMMITTED,noRollbackFor = {RuntimeException.class},readOnly = false,timeout = 3)
+    @Transactional(propagation = Propagation.REQUIRES_NEW )
     @Override
     public void buyBook(String telnum,Integer id){
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {}
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {}
         Account account = this.accountByTelnum(telnum);
         Book book = bookMapper.selectById(id);
+        Integer money = account.getMoney();
+        int price = book.getPrice().intValue();
         //扣除账户余额
         boolean accountByTel = this.updateAccountByTel(telnum, book.getPrice().intValue());
         System.out.println("accountByTel : "+accountByTel);
         //扣除书本库存
         boolean stockNum = bookstockService.updateBookStockNum(1, book.getId());
         System.out.println("stockNum : "+stockNum);
-        if (account.getMoney()<book.getPrice().intValue()){
+        if (money<price){
             throw new RuntimeException("buyBook : 余额不足");
         }
     }
