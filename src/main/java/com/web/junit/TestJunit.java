@@ -62,6 +62,7 @@ public class TestJunit {
 
     @Test
     public void aopTest(){
+        System.out.println(" aop class "+arithmeticCalculatorI.getClass().getName());
         int result=arithmeticCalculatorI.add(1,2);
         System.out.println("-->"+result);
         result=arithmeticCalculatorI.div(4,2);
