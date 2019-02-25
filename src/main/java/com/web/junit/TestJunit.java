@@ -64,7 +64,7 @@ public class TestJunit {
     public void aopTest(){
         int result=arithmeticCalculatorI.add(1,2);
         System.out.println("-->"+result);
-        result=arithmeticCalculatorI.sub(4,2);
+        result=arithmeticCalculatorI.div(4,2);
         System.out.println("-->"+result);
     }
 
