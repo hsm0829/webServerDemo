@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
+
 /**
  * <p>
  *  服务实现类
@@ -59,7 +61,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
      * @param id
      */
 //    @Transactional(propagation = Propagation.REQUIRES_NEW , isolation = Isolation.READ_COMMITTED,noRollbackFor = {RuntimeException.class},readOnly = false,timeout = 3)
-    @Transactional(propagation = Propagation.REQUIRES_NEW )
+    @Transactional(propagation = Propagation.REQUIRES_NEW ,isolation = READ_COMMITTED)
     @Override
     public void buyBook(String telnum,Integer id){
 //        try {
