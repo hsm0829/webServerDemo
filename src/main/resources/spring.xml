@@ -34,6 +34,7 @@
 
     <!-- aop -->
     <!-- 配置，使AspectJ起作用：自动为匹配的类生成代理对象 -->
-    <aop:aspectj-autoproxy />
+    <!-- expose-proxy 默认false，目标对象内部的自我调用将无法实施切面中的增强（代理对象），设置成true后，我们就能在同一个service中，拿到自己的代理对象了 -->
+    <aop:aspectj-autoproxy expose-proxy="true" />
 
 </beans>
