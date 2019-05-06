@@ -60,7 +60,7 @@ public class Test {
 //        }
         //方法引用
 //        methodTest();
-        sort2Stream(list);
+//        sort2Stream(list);
     }
 
     /**
