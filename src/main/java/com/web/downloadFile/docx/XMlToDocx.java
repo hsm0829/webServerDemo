@@ -36,7 +36,7 @@ public class XMlToDocx {
     private static void toText(Map<String,Object> dataMap, String outFilePath, Template template)throws Exception  {
         File docFile = new File(outFilePath);
         FileOutputStream fos = new FileOutputStream(docFile);
-        Writer out = new BufferedWriter(new OutputStreamWriter(fos),10240);
+        Writer out = new BufferedWriter(new OutputStreamWriter(fos,"UTF-8"),10240);
         template.process(dataMap,out);
         if(out != null){
             out.close();
@@ -57,6 +57,7 @@ public class XMlToDocx {
         String fileDirectory = ftlPath;
         /** 加载文件 **/
         configuration.setDirectoryForTemplateLoading(new File(fileDirectory));
+        configuration.setDefaultEncoding("UTF-8");
 
         /** 加载模板 **/
         Template template = configuration.getTemplate("document.xml");
