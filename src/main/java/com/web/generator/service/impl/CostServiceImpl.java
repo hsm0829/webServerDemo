@@ -31,7 +31,7 @@ public class CostServiceImpl extends ServiceImpl<CostMapper, Cost> implements Co
 
     @Override
     public List<Cost> findCostPage(int pageSize, int current, Cost cost) {
-        log.info("findCostPage params : pageSize:{},current,cost:{}",pageSize,current, JSON.toJSONString(cost));
+//        log.info("findCostPage params : pageSize:{},current,cost:{}",pageSize,current, JSON.toJSONString(cost));
         EntityWrapper ew=null;
         if(cost!=null){
             ew=new EntityWrapper();//mybatis-plus 条件构造器

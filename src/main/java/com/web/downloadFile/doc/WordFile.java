@@ -1,11 +1,9 @@
-package com.web.downloadFile;
+package com.web.downloadFile.doc;
 
 
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import java.io.*;
 import java.util.HashMap;
