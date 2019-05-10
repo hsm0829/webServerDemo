@@ -1,11 +1,16 @@
 package com.web.downloadFile.docx;
 
+import com.lowagie.text.Font;
+import com.lowagie.text.pdf.BaseFont;
+import fr.opensagres.xdocreport.itext.extension.font.IFontProvider;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.xwpf.converter.pdf.PdfConverter;
 import org.apache.poi.xwpf.converter.pdf.PdfOptions;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
+import java.awt.*;
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +31,7 @@ public class XMlToDocx {
             params.put("legalPersonPhone","15868457889");
             params.put("businessScope","计算机");
             makeWord(params,"F:/makeWord/financing","F:/makeWord/financing/融资业务申请书111",null);
+            makePdfByXcode("F:/makeWord/financing","F:/makeWord/financing/融资业务申请书111");
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -86,9 +92,9 @@ public class XMlToDocx {
                 fileImg.delete();
             }
             //docx转pdf
-            XWPFDocument doc = new XWPFDocument(new FileInputStream(docFilePath+".docx"));// docx
-            PdfOptions options = PdfOptions.create();
-            PdfConverter.getInstance().convert(doc, new FileOutputStream(docFilePath+".pdf"), options);// pdf
+//            XWPFDocument doc = new XWPFDocument(new FileInputStream(docFilePath+".docx"));// docx
+//            PdfOptions options = PdfOptions.create();
+//            PdfConverter.getInstance().convert(doc, new FileOutputStream(docFilePath+".pdf"), options);// pdf
         } catch (Exception e) {
             System.out.println(e.toString());
         }
@@ -97,7 +103,7 @@ public class XMlToDocx {
     /**
      * 生成pdf
      */
-    /*public static  void makePdfByXcode(String ftlPath,String docFilePath){
+    public static  void makePdfByXcode(String ftlPath,String docFilePath){
         try {
             XWPFDocument document=new XWPFDocument(new FileInputStream(new File(docFilePath+".docx")));
             File outFile=new File(docFilePath+".pdf");
@@ -106,32 +112,33 @@ public class XMlToDocx {
             }
             OutputStream out=new FileOutputStream(outFile);
             PdfOptions options= PdfOptions.getDefault();
-            IFontProvider iFontProvider = new IFontProvider() {
+            IFontProvider iFontProvider=new IFontProvider() {
                 @Override
                 public Font getFont(String familyName, String encoding, float size, int style, Color color) {
-                    try {
-                        BaseFont bfChinese = null;
-                        if( OS.indexOf("linux")>=0){
+                    try{
+                        BaseFont bfChinese=null;
+                        String osName=System.getProperty("os.name");//运行环境
+                        if(osName.indexOf("Linux")!=-1){
                             bfChinese =  BaseFont.createFont(ftlPath+"/font/msyh.ttf", BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);
                         }else{
-                            bfChinese =  BaseFont.createFont("C:/WINDOWS/Fonts/STSONG.TTF", BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);
+                            bfChinese =  BaseFont.createFont("C:/WINDOWS/Fonts/华文宋体.TTF", BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);
                         }
                         Font fontChinese = new Font(bfChinese, size, style, color);
-                        if (familyName != null)
+                        if(StringUtils.isNotEmpty(familyName)){
                             fontChinese.setFamily(familyName);
+                        }
                         return fontChinese;
-                    } catch (Exception e) {
+                    }catch(Exception e){
                         e.printStackTrace();
-                        return null;
                     }
+                    return null;
                 }
             };
             options.fontProvider( iFontProvider );
             PdfConverter.getInstance().convert(document,out,options);
-
         }
         catch (  Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }
