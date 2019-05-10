@@ -155,6 +155,21 @@
       <artifactId>freemarker</artifactId>
       <version>2.3.23</version>
     </dependency>
+    <!--<dependency>-->
+      <!--<groupId>com.artofsolving</groupId>-->
+      <!--<artifactId>jodconverter-maven-plugin</artifactId>-->
+      <!--<version>2.2.1</version>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>fr.opensagres.xdocreport</groupId>
+      <artifactId>org.apache.poi.xwpf.converter.core</artifactId>
+      <version>1.0.5</version>
+    </dependency>
+    <dependency>
+      <groupId>fr.opensagres.xdocreport</groupId>
+      <artifactId>org.apache.poi.xwpf.converter.pdf</artifactId>
+      <version>1.0.5</version>
+    </dependency>
     <!--  生成word、pdf文件依赖 -->
   </dependencies>
 

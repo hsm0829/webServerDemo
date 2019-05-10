@@ -2,6 +2,10 @@ package com.web.downloadFile.docx;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import org.apache.poi.xwpf.converter.pdf.PdfConverter;
+import org.apache.poi.xwpf.converter.pdf.PdfOptions;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
@@ -81,6 +85,10 @@ public class XMlToDocx {
             if(fileImg.exists()){
                 fileImg.delete();
             }
+            //docx转pdf
+            XWPFDocument doc = new XWPFDocument(new FileInputStream(docFilePath+".docx"));// docx
+            PdfOptions options = PdfOptions.create();
+            PdfConverter.getInstance().convert(doc, new FileOutputStream(docFilePath+".pdf"), options);// pdf
         } catch (Exception e) {
             System.out.println(e.toString());
         }
